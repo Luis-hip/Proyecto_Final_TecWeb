@@ -27,9 +27,13 @@ $(document).ready(function() {
     $.get('./backend/resource-list.php', render); 
 
     // Buscar recursos al escribir en el campo de busqueda
-    $('#public-search').keyup(function() {
-        // Si el input tiene texto, usa la ruta de busqueda; si esta vacio, cargar todos los recursos
-        $.get($(this).val() ? './backend/resource-search.php' : './backend/resource-list.php', {search: $(this).val()}, render);
+    $(document).on('input', '#public-search', function() {
+        const valor = $(this).val();
+        
+        // Decidimos la ruta: ¿Buscar específico o Listar todo?
+        const url = valor ? './backend/resource-search.php' : './backend/resource-list.php';
+        // Realizamos la petición y renderizamos los resultados
+        $.get(url, {search: valor}, render);
     });
 
     //

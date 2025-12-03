@@ -76,8 +76,8 @@ class Resources extends Database{
     //Busca recursos por nombre, descripcion o lenguaje que contengan el término de búsqueda
     public function buscar($term) {
         $term = $this->conexion->real_escape_string($term);
-        //LIKE con condiciones para busqueda parcial en nombre, descripcion o lenguaje
-        $sql = "SELECT * FROM recursos WHERE status=0 AND (nombre LIKE '%$term%' OR descripcion LIKE '%$term%' OR lenguaje LIKE '%$term%')";
+        //LIKE con condiciones para busqueda parcial en nombre, descripcion, lenguaje o formato
+        $sql = "SELECT * FROM recursos WHERE status=0 AND (nombre LIKE '%$term%' OR descripcion LIKE '%$term%' OR lenguaje LIKE '%$term%' OR formato LIKE '%$term%')";
         $result = $this->conexion->query($sql);
         //Devuelve todos los resultados
         $this->data = $result->fetch_all(MYSQLI_ASSOC);
